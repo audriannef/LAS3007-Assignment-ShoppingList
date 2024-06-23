@@ -16,15 +16,15 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.shoppingList.restservice.environments.CIEnvironmentExtension;
+import com.shoppingList.restservice.environments.LocalEnvironmentExtension;
 
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 
 @Tag("acceptance")
-//@ExtendWith(LocalEnvironmentExtension.class)
+@ExtendWith(LocalEnvironmentExtension.class)
 //@ExtendWith(DevEnvironmentExtension.class)
-@ExtendWith(CIEnvironmentExtension.class)
+//@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListCategoryFilterIT {
 
 	@SuppressWarnings("unused")
@@ -38,6 +38,7 @@ public class ShoppingListCategoryFilterIT {
     
 	@Test
     public void testFilterCategory() {
+		// Test filter on a category which exists in the shopping list
     	loadShoppingListSample();
     	given()
     		.queryParam("key",KEY)
@@ -52,7 +53,7 @@ public class ShoppingListCategoryFilterIT {
     
     @Test
     public void testFilterNonExistingCategory() {
-    	
+    	// Test filter on a category which does not exist in the shopping list
         given()
         	.queryParam("key",KEY)
         .when()
@@ -64,7 +65,7 @@ public class ShoppingListCategoryFilterIT {
     
     @Test
     public void testDeleteCategory() {
-    	
+    	// Test deleting all items having 'food' category from the shopping list
     	loadShoppingListSample();
     	
     	given()
@@ -87,27 +88,27 @@ public class ShoppingListCategoryFilterIT {
     
     @Test
     public void testFilterOnEmptyList() {
-    	
+    	// Test filter against an empty shopping list
     	given()
     		.queryParam("key",KEY)
         .when()
         	.delete("/shopList")
         .then()
-        	.statusCode(anyOf(equalTo(404),equalTo(204)));
+        	.statusCode(anyOf(equalTo(404),equalTo(204))); // Not Found or No content
         	
     	given()
     		.queryParam("key",KEY)
         .when()
             .get("/shopList/category/drink")
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("size()", equalTo(0));
         
     }
     
     @Test
     public void testFilterDeleteOnEmptyList() {
-    	
+    	// Test delete a category from an empty shopping list
     	given()
     		.queryParam("key",KEY)
         .when()
@@ -120,7 +121,7 @@ public class ShoppingListCategoryFilterIT {
         .when()
             .delete("/shopList/category/drink")
         .then()
-            .statusCode(404);
+            .statusCode(404); // Not Found
         
     }
     
@@ -133,7 +134,7 @@ public class ShoppingListCategoryFilterIT {
     	.when()
     		.delete("/shopList")
     	.then()
-    		.statusCode(anyOf(equalTo(404),equalTo(204)))
+    		.statusCode(anyOf(equalTo(404),equalTo(204))) // Not found or No content
     		;
     	
         given()
@@ -143,7 +144,7 @@ public class ShoppingListCategoryFilterIT {
         .when()
         	.post("/shopList/addItems")
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("size()", greaterThanOrEqualTo(0));
         }
     

@@ -14,15 +14,15 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.shoppingList.restservice.environments.CIEnvironmentExtension;
+import com.shoppingList.restservice.environments.LocalEnvironmentExtension;
 
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 
 @Tag("acceptance")
-//@ExtendWith(LocalEnvironmentExtension.class)
+@ExtendWith(LocalEnvironmentExtension.class)
 //@ExtendWith(DevEnvironmentExtension.class)
-@ExtendWith(CIEnvironmentExtension.class)
+//@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListSortIT {
 
 	@SuppressWarnings("unused")
@@ -37,6 +37,7 @@ public class ShoppingListSortIT {
 	
 	@Test
     public void testShoppingListSort() {
+		// Test sorting a shopping list based on category
 		loadShoppingListSample();
     	String[] orderedListAsc = 
     		{"beverage","beverage","beverage",
@@ -55,7 +56,7 @@ public class ShoppingListSortIT {
 	
 	@Test
     public void testEmptyShoppingListSort() {
-    	
+		// Test sorting an empty shopping list
     	 given()
     	 	.queryParam("key",KEY)
          .when()
@@ -76,31 +77,41 @@ public class ShoppingListSortIT {
 	
 	@Test
     public void testShoppingListSortWithDesc() {
-    	
+		// Test sorting a shopping list in descending order
 		loadShoppingListSample();
-    	
+		String[] orderedListAsc = 
+    		{"food","food","food","food",
+    		  "clothes",	"clothes",
+    			 "beverage","beverage","beverage"};
+		
         given()
         	.queryParam("key",KEY)
         .when()
             .get("/shopList/sortBy?ord=DESC")
         .then()
             .statusCode(200)
-            .body("size()", equalTo(9));
+            .body("size()", equalTo(9))
+            .body("category", contains(orderedListAsc));;
         
     }
 	
 	@Test
     public void testShoppingListSortWithAsc() {
-    	
+		// Test sorting a shopping list in ascending order    	
 		loadShoppingListSample();
-    	
+		String[] orderedListAsc = 
+    		{"beverage","beverage","beverage",
+    			 "clothes",	"clothes",
+    			 "food","food","food","food"};
+		
         given()
         	.queryParam("key",KEY)
         .when()
             .get("/shopList/sortBy?ord=ASC")
         .then()
             .statusCode(200)
-            .body("size()", equalTo(9));
+            .body("size()", equalTo(9))
+            .body("category", contains(orderedListAsc));
         
     }
 	
@@ -113,7 +124,7 @@ public class ShoppingListSortIT {
         .when()
             .get("/shopList/sortBy")
         .then()
-            .statusCode(400);
+            .statusCode(400); // Bad Request
         
     }
 	
