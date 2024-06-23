@@ -33,7 +33,6 @@ import io.restassured.http.ContentType;
 @ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListIT {
 
-	@SuppressWarnings("unused")
 	private static String KEY;
 	
 	private static Random RANDOM = new Random();
@@ -51,7 +50,7 @@ public class ShoppingListIT {
 		.when()
 			.delete("/shopList")
 		.then()
-			.statusCode(anyOf(equalTo(404),equalTo(204)))
+			.statusCode(anyOf(equalTo(404),equalTo(204))) // Not Found or  No Content
 		;
 	}
 	
@@ -68,6 +67,7 @@ public class ShoppingListIT {
 	
 	@Test
     public void testGetShoppingListWithoutKey() {
+		// Test adding an item without passing an api key
         given()
         .when()
             .get("/shopList")
@@ -78,6 +78,7 @@ public class ShoppingListIT {
 	
 	@Test
     public void testAddItem() {
+		// Test adding an item with valid details in body
         Item newItem = createItem();
         given()
             .contentType(ContentType.JSON)
@@ -86,7 +87,7 @@ public class ShoppingListIT {
         .when()
             .post("/shopList")
         .then()
-            .statusCode(200)
+            .statusCode(200) 
             .body("category", equalTo(newItem.category()))
             .body("qty", equalTo(newItem.qty()));
     }
@@ -94,7 +95,7 @@ public class ShoppingListIT {
 	@ParameterizedTest
     @MethodSource("itemCreator")
     public void testDuplicateItem(Item newItem) {
-        
+        // test creating an item which share the same id
         given()
             .contentType(ContentType.JSON)
             .body(newItem)
@@ -102,7 +103,7 @@ public class ShoppingListIT {
         .when()
             .post("/shopList")
         .then()
-        	.statusCode(409)// Conflict
+        	.statusCode(409)
         	.body(is("Resource already exists"))
         	;  
     }
@@ -110,6 +111,7 @@ public class ShoppingListIT {
 	
 	@Test
 	public void testAddItemNegativeQuantity() {
+		// test creating an item with a negative value in quantity field
 		Item negQtyItem = new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), -1);
 		
         given()
@@ -127,6 +129,7 @@ public class ShoppingListIT {
 	
 	@Test
 	public void testAddItemWithBlankCategory() {
+		//test adding an item with an empty category field
 		Item blankCatItem = new Item(RANDOM.nextLong(), "     ", randomAlphabetic(10),  RANDOM.nextInt(100));
 		
         given()
@@ -144,6 +147,7 @@ public class ShoppingListIT {
 	
 	@Test
 	public void testAddItemWithNullId() {
+		// Test adding an item with a null Id
 		Item nullIdItem = new Item(null, randomAlphabetic(10), randomAlphabetic(10),  RANDOM.nextInt(100));
 		
         given()
@@ -154,7 +158,7 @@ public class ShoppingListIT {
             .post("/shopList")
         .then()
         	.contentType(ContentType.TEXT)
-            .statusCode(400)
+            .statusCode(400) // Bad Request
             .body(is("id must be specified"))
             ;
     }
@@ -175,6 +179,8 @@ public class ShoppingListIT {
     @ParameterizedTest
     @ValueSource(ints = {0,1,50})
     public void testAddNItems(int num) {
+    	// Test adding a number of items to the shopping list
+    	
         clearList();
         
         for (int i = 0; i < num; i++) {
@@ -189,6 +195,7 @@ public class ShoppingListIT {
 	        .then()
 	            .statusCode(200)
 	            .body("category", equalTo(item.category()))
+	            .body("description", equalTo(item.description()))
 	            .body("qty", equalTo(item.qty()));
 	        }
     	
@@ -203,6 +210,7 @@ public class ShoppingListIT {
     
     
    private static Stream<Item> itemCreator() {
+	   // add a new item to the shopping list
         Item item = new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), RANDOM.nextInt(100));
 
         Item newItem = given()

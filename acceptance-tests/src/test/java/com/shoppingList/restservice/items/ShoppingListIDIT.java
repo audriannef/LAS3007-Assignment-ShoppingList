@@ -31,7 +31,6 @@ import io.restassured.http.ContentType;
 @ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListIDIT {
 
-	@SuppressWarnings("unused")
 	private static String KEY;
 	
 	private static Random RANDOM = new Random();
@@ -49,13 +48,13 @@ public class ShoppingListIDIT {
 		.when()
 			.delete("/shopList")
 		.then()
-			.statusCode(anyOf(equalTo(404),equalTo(204)))
+			.statusCode(anyOf(equalTo(404),equalTo(204))) // Not Found or  No Content
 		;
 	}
 	
 	@Test
     public void testGetNonExistingItem() {
-        // Test retrieving an item not found in list
+        // Test retrieving an item which does not exist in the shopping list
         given()
         	.queryParam("key",KEY)
         .when()
@@ -68,6 +67,7 @@ public class ShoppingListIDIT {
     @ParameterizedTest
     @MethodSource("itemCreator")
     public void testGetItemDetailsById(Item item) {
+    	// Test retrieving an item which exists in the shopping list
         Long itemIdInList = item.id();
 
         given()
@@ -75,7 +75,7 @@ public class ShoppingListIDIT {
         .when()
             .get("/shopList/id/{id}", itemIdInList)
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("id", equalTo(item.id()))
             .body("category", equalTo(item.category()))
             .body("qty", equalTo(item.qty().intValue()))
@@ -85,14 +85,25 @@ public class ShoppingListIDIT {
     @ParameterizedTest
     @MethodSource("itemCreator")
 	public void testDeleteItem(Item item) {
-	
+    	// Test deleting an item which exists in the shopping list
        given()
        	.queryParam("key",KEY)
        .when()
            .delete("/shopList/id/{id}", item.id())
        .then()
-           .statusCode(204);
+           .statusCode(204); // No content
    }
+    
+    @Test
+    public void testDeleteNonExistingItem() {
+        // Test delete an item which does not exist in the shopping list
+        given()
+        	.queryParam("key",KEY)
+        .when()
+            .delete("/shopList/id/{id}", 99999)
+        .then()
+            .statusCode(404);  // Not Found
+    }
        
    private static Stream<Item> itemCreator() {
         Item item = new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), RANDOM.nextInt(100));

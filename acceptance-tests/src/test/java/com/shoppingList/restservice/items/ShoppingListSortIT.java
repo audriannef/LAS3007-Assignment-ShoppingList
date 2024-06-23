@@ -25,7 +25,6 @@ import io.restassured.filter.log.LogDetail;
 @ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListSortIT {
 
-	@SuppressWarnings("unused")
 	private static String KEY;
 	
 	@BeforeAll
@@ -37,6 +36,7 @@ public class ShoppingListSortIT {
 	
 	@Test
     public void testShoppingListSort() {
+		// Test sorting a shopping list based on category
 		loadShoppingListSample();
     	String[] orderedListAsc = 
     		{"beverage","beverage","beverage",
@@ -48,20 +48,20 @@ public class ShoppingListSortIT {
         .when()
             .get("/shopList/sort")
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("size()", greaterThanOrEqualTo(0))
             .body("category", contains(orderedListAsc));
     }
 	
 	@Test
     public void testEmptyShoppingListSort() {
-    	
+		// Test sorting an empty shopping list
     	 given()
     	 	.queryParam("key",KEY)
          .when()
          	.delete("/shopList")
          .then()
-         	.statusCode(anyOf(equalTo(404),equalTo(204)));
+         	.statusCode(anyOf(equalTo(404),equalTo(204))); // Not found or no content
     	
     	
         given()
@@ -69,38 +69,48 @@ public class ShoppingListSortIT {
         .when()
             .get("/shopList/sort")
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("size()", equalTo(0));
         
     }
 	
 	@Test
     public void testShoppingListSortWithDesc() {
-    	
+		// Test sorting a shopping list in descending order
 		loadShoppingListSample();
-    	
+		String[] orderedListAsc = 
+    		{"food","food","food","food",
+    		  "clothes",	"clothes",
+    			 "beverage","beverage","beverage"};
+		
         given()
         	.queryParam("key",KEY)
         .when()
             .get("/shopList/sortBy?ord=DESC")
         .then()
-            .statusCode(200)
-            .body("size()", equalTo(9));
+            .statusCode(200) // OK
+            .body("size()", equalTo(9))
+            .body("category", contains(orderedListAsc));;
         
     }
 	
 	@Test
     public void testShoppingListSortWithAsc() {
-    	
+		// Test sorting a shopping list in ascending order    	
 		loadShoppingListSample();
-    	
+		String[] orderedListAsc = 
+    		{"beverage","beverage","beverage",
+    			 "clothes",	"clothes",
+    			 "food","food","food","food"};
+		
         given()
         	.queryParam("key",KEY)
         .when()
             .get("/shopList/sortBy?ord=ASC")
         .then()
-            .statusCode(200)
-            .body("size()", equalTo(9));
+            .statusCode(200) // OK
+            .body("size()", equalTo(9))
+            .body("category", contains(orderedListAsc));
         
     }
 	
@@ -113,7 +123,7 @@ public class ShoppingListSortIT {
         .when()
             .get("/shopList/sortBy")
         .then()
-            .statusCode(400);
+            .statusCode(400); // Bad Request
         
     }
 	
@@ -127,7 +137,7 @@ public class ShoppingListSortIT {
     	.when()
     		.delete("/shopList")
     	.then()
-    		.statusCode(anyOf(equalTo(404),equalTo(204)))
+    		.statusCode(anyOf(equalTo(404),equalTo(204))) // Not found or no content
     		;
     	
         given()
@@ -137,7 +147,7 @@ public class ShoppingListSortIT {
         .when()
         	.post("/shopList/addItems")
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("size()", greaterThanOrEqualTo(0));
         
             

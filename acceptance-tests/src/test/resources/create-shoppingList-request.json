@@ -6,10 +6,10 @@
     "qty": 6
   },
   {
-    "id": 2,
-    "category": "beverage",
-    "description": "beer",
-    "qty": 4
+    "id": 4,
+    "category": "food",
+    "description": "bread",
+    "qty": 3
   },
   {
     "id": 3,
@@ -17,17 +17,18 @@
     "description": "milk",
     "qty": 2
   },
-  {
-    "id": 4,
-    "category": "food",
-    "description": "bread",
-    "qty": 3
-  },
+  
   {
     "id": 5,
     "category": "food",
     "description": "pasta",
     "qty": 5
+  },
+  {
+    "id": 9,
+    "category": "clothes",
+    "description": "jacket",
+    "qty": 1
   },
   {
     "id": 6,
@@ -47,11 +48,12 @@
     "description": "shirt",
     "qty": 2
   },
+  
   {
-    "id": 9,
-    "category": "clothes",
-    "description": "jacket",
-    "qty": 1
+    "id": 2,
+    "category": "beverage",
+    "description": "beer",
+    "qty": 4
   }
   
 ]
