@@ -16,15 +16,15 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.shoppingList.restservice.environments.LocalEnvironmentExtension;
+import com.shoppingList.restservice.environments.CIEnvironmentExtension;
 
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 
 @Tag("acceptance")
-@ExtendWith(LocalEnvironmentExtension.class)
+//@ExtendWith(LocalEnvironmentExtension.class)
 //@ExtendWith(DevEnvironmentExtension.class)
-//@ExtendWith(CIEnvironmentExtension.class)
+@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListCategoryFilterIT {
 
 	private static String KEY;

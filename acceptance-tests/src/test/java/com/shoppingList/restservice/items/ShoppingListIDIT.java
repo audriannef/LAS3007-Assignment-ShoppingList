@@ -17,7 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import com.shoppingList.restservice.environments.LocalEnvironmentExtension;
+import com.shoppingList.restservice.environments.CIEnvironmentExtension;
 import com.shoppingList.restservice.items.models.Item;
 
 import io.restassured.RestAssured;
@@ -26,9 +26,9 @@ import io.restassured.http.ContentType;
 
 
 @Tag("acceptance")
-@ExtendWith(LocalEnvironmentExtension.class)
+//@ExtendWith(LocalEnvironmentExtension.class)
 //@ExtendWith(DevEnvironmentExtension.class)
-//@ExtendWith(CIEnvironmentExtension.class)
+@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListIDIT {
 
 	private static String KEY;
