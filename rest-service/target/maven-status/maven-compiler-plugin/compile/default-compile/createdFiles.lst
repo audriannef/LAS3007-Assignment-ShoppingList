@@ -1,0 +1,6 @@
+com\shoppingList\restservice\items\ShoppingListService.class
+com\shoppingList\restservice\items\Item.class
+com\shoppingList\restservice\RestServiceApplication.class
+com\shoppingList\restservice\exceptions\ResourceAlreadyExistsException.class
+com\shoppingList\restservice\items\ShoppingListController.class
+com\shoppingList\restservice\RestResponseEntityExceptionHandler.class

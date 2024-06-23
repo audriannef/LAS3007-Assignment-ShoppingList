@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "category": "beverage",
+    "description": "water",
+    "qty": 6
+  },
+  {
+    "id": 2,
+    "category": "beverage",
+    "description": "beer",
+    "qty": 4
+  },
+  {
+    "id": 3,
+    "category": "beverage",
+    "description": "milk",
+    "qty": 2
+  },
+  {
+    "id": 4,
+    "category": "food",
+    "description": "bread",
+    "qty": 3
+  },
+  {
+    "id": 5,
+    "category": "food",
+    "description": "pasta",
+    "qty": 5
+  },
+  {
+    "id": 6,
+    "category": "food",
+    "description": "frozen vegetables",
+    "qty": 2
+  },
+  {
+    "id": 7,
+    "category": "food",
+    "description": "chicken",
+    "qty": 3
+  },
+  {
+    "id": 8,
+    "category": "clothes",
+    "description": "shirt",
+    "qty": 2
+  },
+  {
+    "id": 9,
+    "category": "clothes",
+    "description": "jacket",
+    "qty": 1
+  }
+  
+]
