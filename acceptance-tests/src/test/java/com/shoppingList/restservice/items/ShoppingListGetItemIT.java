@@ -29,7 +29,7 @@ import io.restassured.http.ContentType;
 //@ExtendWith(LocalEnvironmentExtension.class)
 //@ExtendWith(DevEnvironmentExtension.class)
 @ExtendWith(CIEnvironmentExtension.class)
-public class ShoppingListIDIT {
+public class ShoppingListGetItemIT {
 
 	private static String KEY;
 	
@@ -82,29 +82,6 @@ public class ShoppingListIDIT {
             .body("description", is(item.description()));
     }
     
-    @ParameterizedTest
-    @MethodSource("itemCreator")
-	public void testDeleteItem(Item item) {
-    	// Test deleting an item which exists in the shopping list
-       given()
-       	.queryParam("key",KEY)
-       .when()
-           .delete("/shopList/id/{id}", item.id())
-       .then()
-           .statusCode(204); // No content
-   }
-    
-    @Test
-    public void testDeleteNonExistingItem() {
-        // Test delete an item which does not exist in the shopping list
-        given()
-        	.queryParam("key",KEY)
-        .when()
-            .delete("/shopList/id/{id}", 99999)
-        .then()
-            .statusCode(404);  // Not Found
-    }
-       
    private static Stream<Item> itemCreator() {
         Item item = new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), RANDOM.nextInt(100));
 

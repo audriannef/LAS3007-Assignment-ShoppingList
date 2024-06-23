@@ -135,7 +135,6 @@ pipeline {
                             }
                             steps {
                                 echo 'Running Acceptance Tests on Dev ....'
-                                //sh 'mvn verify -Pacceptance-tests'
                                 
                                 withCredentials([string(credentialsId: 'api-key', variable: 'KEY')])
     							{
