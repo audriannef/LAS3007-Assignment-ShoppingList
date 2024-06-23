@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.shoppingList.restservice.item.ShoppingListIT
--------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.241 s -- in com.shoppingList.restservice.item.ShoppingListIT
