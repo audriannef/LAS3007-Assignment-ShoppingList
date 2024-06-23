@@ -116,7 +116,8 @@ public class ShoppingListSortIT {
 	
 	@Test
     public void testShoppingListSortOrderNotSpecified() {
-    	loadShoppingListSample();
+		// Test sorting a shopping list, but order of ASC or DESC is not specified
+		loadShoppingListSample();
     	
         given()
         	.queryParam("key",KEY)
