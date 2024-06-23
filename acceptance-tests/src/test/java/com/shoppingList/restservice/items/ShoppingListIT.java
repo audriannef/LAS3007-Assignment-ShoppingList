@@ -33,7 +33,6 @@ import io.restassured.http.ContentType;
 //@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListIT {
 
-	@SuppressWarnings("unused")
 	private static String KEY;
 	
 	private static Random RANDOM = new Random();
@@ -196,6 +195,7 @@ public class ShoppingListIT {
 	        .then()
 	            .statusCode(200)
 	            .body("category", equalTo(item.category()))
+	            .body("description", equalTo(item.description()))
 	            .body("qty", equalTo(item.qty()));
 	        }
     	

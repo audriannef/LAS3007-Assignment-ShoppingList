@@ -27,7 +27,6 @@ import io.restassured.filter.log.LogDetail;
 //@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListCategoryFilterIT {
 
-	@SuppressWarnings("unused")
 	private static String KEY;
 	
 	@BeforeAll

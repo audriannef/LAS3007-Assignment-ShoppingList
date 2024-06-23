@@ -31,7 +31,6 @@ import io.restassured.http.ContentType;
 //@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListIDIT {
 
-	@SuppressWarnings("unused")
 	private static String KEY;
 	
 	private static Random RANDOM = new Random();

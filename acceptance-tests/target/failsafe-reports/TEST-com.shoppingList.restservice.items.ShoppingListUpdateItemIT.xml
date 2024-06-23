@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report-3.0.xsd" version="3.0" name="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.219" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report-3.0.xsd" version="3.0" name="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.353" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\audri\AppData\Local\Temp\surefire1896904732946615930\surefirebooter-20240623100419132_3.jar C:\Users\audri\AppData\Local\Temp\surefire1896904732946615930 2024-06-23T10-04-18_822-jvmRun1 surefire-20240623100419132_1tmp surefire_0-20240623100419132_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\audri\AppData\Local\Temp\surefire5167423622641820674\surefirebooter-20240623130010642_3.jar C:\Users\audri\AppData\Local\Temp\surefire5167423622641820674 2024-06-23T13-00-10_275-jvmRun1 surefire-20240623130010642_1tmp surefire_0-20240623130010642_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\audri\git\LAS3007-Assignment-ShoppingList1\acceptance-tests\target\test-classes;C:\Users\audri\git\LAS3007-Assignment-ShoppingList1\acceptance-tests\target\acceptance-tests-0.0.1-SNAPSHOT.jar;C:\Users\audri\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\audri\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\audri\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\audri\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\audri\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\audri\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\audri\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\audri\.m2\repository\org\junit\platform\junit-platform-suite-api\1.10.2\junit-platform-suite-api-1.10.2.jar;C:\Users\audri\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\audri\.m2\repository\io\rest-assured\rest-assured\5.4.0\rest-assured-5.4.0.jar;C:\Users\audri\.m2\repository\org\apache\groovy\groovy\4.0.16\groovy-4.0.16.jar;C:\Users\audri\.m2\repository\org\apache\groovy\groovy-xml\4.0.16\groovy-xml-4.0.16.jar;C:\Users\audri\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\audri\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\audri\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\audri\.m2\repository\commons-codec\commons-codec\1.11\commons-codec-1.11.jar;C:\Users\audri\.m2\repository\org\apache\httpcomponents\httpmime\4.5.13\httpmime-4.5.13.jar;C:\Users\audri\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\audri\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2.1\tagsoup-1.2.1.jar;C:\Users\audri\.m2\repository\io\rest-assured\json-path\5.4.0\json-path-5.4.0.jar;C:\Users\audri\.m2\repository\org\apache\groovy\groovy-json\4.0.16\groovy-json-4.0.16.jar;C:\Users\audri\.m2\repository\io\rest-assured\rest-assured-common\5.4.0\rest-assured-common-5.4.0.jar;C:\Users\audri\.m2\repository\io\rest-assured\xml-path\5.4.0\xml-path-5.4.0.jar;C:\Users\audri\.m2\repository\org\apache\commons\commons-lang3\3.11\commons-lang3-3.11.jar;C:\Users\audri\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.16.1\jackson-databind-2.16.1.jar;C:\Users\audri\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.16.1\jackson-annotations-2.16.1.jar;C:\Users\audri\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.16.1\jackson-core-2.16.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\audri\AppData\Local\Temp\surefire1896904732946615930\surefirebooter-20240623100419132_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\audri\AppData\Local\Temp\surefire5167423622641820674\surefirebooter-20240623130010642_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS-58"/>
@@ -60,8 +60,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testUpdateItemDetailsById" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.107"/>
-  <testcase name="testUpdateItemDetailsWithInvalidBody" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.024"/>
-  <testcase name="testUpdateItemDetailsForNonExistantID" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.046"/>
-  <testcase name="testUpdateItemDetailsOnEmptyList" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.037"/>
+  <testcase name="testUpdateItemDetailsById" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.251"/>
+  <testcase name="testUpdateItemDetailsWithInvalidBody" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.03"/>
+  <testcase name="testUpdateItemDetailsForNonExistantID" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.028"/>
+  <testcase name="testUpdateItemDetailsOnEmptyList" classname="com.shoppingList.restservice.items.ShoppingListUpdateItemIT" time="0.039"/>
 </testsuite>

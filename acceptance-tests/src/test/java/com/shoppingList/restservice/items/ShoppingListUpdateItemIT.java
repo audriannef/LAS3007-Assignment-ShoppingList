@@ -25,7 +25,6 @@ import io.restassured.filter.log.LogDetail;
 //@ExtendWith(CIEnvironmentExtension.class)
 public class ShoppingListUpdateItemIT {
 
-	@SuppressWarnings("unused")
 	private static String KEY;
 	
 	@BeforeAll
@@ -48,7 +47,10 @@ public class ShoppingListUpdateItemIT {
             .put("/shopList/id/{id}", 9L)
         .then()
             .statusCode(200)
-            .body("id", equalTo(9));
+            .body("id", equalTo(9))
+        	.body("category", equalTo("clothes"))
+        	.body("description", equalTo("trousers"))
+        	.body("qty", equalTo(4));
     }
     
     @Test
@@ -62,7 +64,7 @@ public class ShoppingListUpdateItemIT {
         .when()
             .put("/shopList/id/{id}", 9999999)
         .then()
-            .statusCode(404);;
+            .statusCode(404);
     }
     
     @Test
@@ -75,7 +77,7 @@ public class ShoppingListUpdateItemIT {
         .when()
             .put("/shopList/id/{id}", 9999999)
         .then()
-            .statusCode(400);;
+            .statusCode(400);
     }
     
     @Test
