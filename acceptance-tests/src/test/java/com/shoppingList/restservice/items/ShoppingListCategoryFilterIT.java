@@ -44,7 +44,8 @@ public class ShoppingListCategoryFilterIT {
         .when()
         	.get("/shopList/category/food")
     	.then()
-        	.statusCode(200)
+        	.statusCode(200) // OK
+        	// all items have their category set to food
         	.body("category", everyItem(is("food")))
         	.body("findAll{i -> i.category != 'food'}", empty());
     }
@@ -53,12 +54,13 @@ public class ShoppingListCategoryFilterIT {
     @Test
     public void testFilterNonExistingCategory() {
     	// Test filter on a category which does not exist in the shopping list
+    	loadShoppingListSample();
         given()
         	.queryParam("key",KEY)
         .when()
             .get("/shopList/category/{category}","abcdef")
         .then()
-        	.statusCode(200)
+        	.statusCode(200) // OK
         	.body("size()", equalTo(0));
     }
     
@@ -72,17 +74,15 @@ public class ShoppingListCategoryFilterIT {
         .when()
         	.delete("/shopList/category/food")
         .then()
-        	.statusCode(204);
+        	.statusCode(204); // No content
         	
     	given()
     		.queryParam("key",KEY)
         .when()
             .get("/shopList")
         .then()
-        	.statusCode(200)
+        	.statusCode(200) // OK
         	.body("findAll{i -> i.category == 'food'}", empty());
-
-        
     }
     
     @Test
@@ -98,7 +98,7 @@ public class ShoppingListCategoryFilterIT {
     	given()
     		.queryParam("key",KEY)
         .when()
-            .get("/shopList/category/drink")
+            .get("/shopList/category/clothes")
         .then()
             .statusCode(200) // OK
             .body("size()", equalTo(0));
@@ -136,6 +136,7 @@ public class ShoppingListCategoryFilterIT {
     		.statusCode(anyOf(equalTo(404),equalTo(204))) // Not found or No content
     		;
     	
+    	// add items in json file to the shopping list
         given()
         	.body(jsonFile)
         	.contentType("application/json")

@@ -64,7 +64,8 @@ public class ShoppingListAddItemIT {
         .when()
             .post("/shopList")
         .then()
-            .statusCode(200) 
+            .statusCode(200) // OK
+            .body("description", equalTo(newItem.description()))
             .body("category", equalTo(newItem.category()))
             .body("qty", equalTo(newItem.qty()));
     }
@@ -72,7 +73,8 @@ public class ShoppingListAddItemIT {
 	@ParameterizedTest
     @MethodSource("itemCreator")
     public void testDuplicateItem(Item newItem) {
-        // test creating an item which share the same id
+        // test creating an item which shares the same id with 
+		// another item in shopping list
         given()
             .contentType(ContentType.JSON)
             .body(newItem)
@@ -80,15 +82,15 @@ public class ShoppingListAddItemIT {
         .when()
             .post("/shopList")
         .then()
-        	.statusCode(409)
-        	.body(is("Resource already exists"))
-        	;  
+        	.statusCode(409) // No content
+        	.body(is("Resource already exists"));  
     }
 	
 	
 	@Test
 	public void testAddItemNegativeQuantity() {
-		// test creating an item with a negative value in quantity field
+		// test creating an item with a negative value in the quantity field
+		// this will be rejected
 		Item negQtyItem = new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), -1);
 		
         given()
@@ -99,14 +101,14 @@ public class ShoppingListAddItemIT {
             .post("/shopList")
         .then()
         	.contentType(ContentType.TEXT)
-            .statusCode(400)
-            .body(is("Quantity must be a positive number"))
-            ;
+            .statusCode(400) // Bad request
+            .body(is("Quantity must be a positive number"));
     }
 	
 	@Test
 	public void testAddItemWithBlankCategory() {
 		//test adding an item with an empty category field
+		// this will be rejected
 		Item blankCatItem = new Item(RANDOM.nextLong(), "     ", randomAlphabetic(10),  RANDOM.nextInt(100));
 		
         given()
@@ -117,14 +119,14 @@ public class ShoppingListAddItemIT {
             .post("/shopList")
         .then()
         	.contentType(ContentType.TEXT)
-            .statusCode(400)
-            .body(is("Category cannot be blank"))
-            ;
+            .statusCode(400) // Bad request
+            .body(is("Category cannot be blank"));
     }
 	
 	@Test
 	public void testAddItemWithNullId() {
 		// Test adding an item with a null Id
+		// this will be rejected
 		Item nullIdItem = new Item(null, randomAlphabetic(10), randomAlphabetic(10),  RANDOM.nextInt(100));
 		
         given()
@@ -157,8 +159,7 @@ public class ShoppingListAddItemIT {
     @ValueSource(ints = {0,1,50})
     public void testAddNItems(int num) {
     	// Test adding a number of items to the shopping list
-    	
-        clearList();
+    	clearList();
         
         for (int i = 0; i < num; i++) {
 	        Item item = createItem();
@@ -188,7 +189,7 @@ public class ShoppingListAddItemIT {
     
    private static Stream<Item> itemCreator() {
 	   // add a new item to the shopping list
-        Item item = new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), RANDOM.nextInt(100));
+        Item item = createItem();
 
         Item newItem = given()
             .contentType(ContentType.JSON)
@@ -204,6 +205,7 @@ public class ShoppingListAddItemIT {
 	}
    
    private static Item createItem() {
+	   // return a new Item
 	   return new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), RANDOM.nextInt(100));
    }
 }

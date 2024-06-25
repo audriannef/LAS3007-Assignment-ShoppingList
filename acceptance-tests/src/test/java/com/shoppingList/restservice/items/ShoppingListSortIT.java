@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.is;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,14 +72,13 @@ public class ShoppingListSortIT {
         .then()
             .statusCode(200) // OK
             .body("size()", equalTo(0));
-        
     }
 	
 	@Test
     public void testShoppingListSortWithDesc() {
 		// Test sorting a shopping list in descending order
 		loadShoppingListSample();
-		String[] orderedListAsc = 
+		String[] orderedListDesc = 
     		{"food","food","food","food",
     		  "clothes",	"clothes",
     			 "beverage","beverage","beverage"};
@@ -90,7 +90,7 @@ public class ShoppingListSortIT {
         .then()
             .statusCode(200) // OK
             .body("size()", equalTo(9))
-            .body("category", contains(orderedListAsc));;
+            .body("category", contains(orderedListDesc));;
         
     }
 	
@@ -128,6 +128,39 @@ public class ShoppingListSortIT {
         
     }
 	
+	@Test
+    public void testEmptyShoppingListSortBy() {
+		// Test sorting an empty shopping list
+    	 given()
+    	 	.queryParam("key",KEY)
+         .when()
+         	.delete("/shopList")
+         .then()
+         	.statusCode(anyOf(equalTo(404),equalTo(204))); // Not found or no content
+    	
+    	
+        given()
+        	.queryParam("key",KEY)
+        .when()
+            .get("/shopList/sortBy?ord=ASC")
+        .then()
+            .statusCode(200) // OK
+            .body("size()", equalTo(0));
+    }
+	
+	@Test
+    public void testShoppingListSortByWithoutAPIKey() {
+		// Test sorting list without api key
+    	 
+        given()
+        .when()
+            .get("/shopList/sortBy?ord=ASC")
+        .then()
+        	.body("detail",is("Invalid request parameters."))
+        	.statusCode(400); // Bad request
+    }
+	
+	
 	
 	private void loadShoppingListSample() {
     	File jsonFile = new File("src/test/resources/create-shoppingList-request.json");
@@ -150,8 +183,7 @@ public class ShoppingListSortIT {
         .then()
             .statusCode(200) // OK
             .body("size()", greaterThanOrEqualTo(0));
-        
-            
         }
+	
 
 }
