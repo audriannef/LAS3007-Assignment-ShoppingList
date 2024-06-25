@@ -67,6 +67,7 @@ public class ShoppingListService {
 		return shopList.removeIf(item -> item.id().equals(id));
 	}
 	
+	// Remove all items
 	public boolean removeAllItems() {
 		return shopList.removeAll(shopList);
 	}
@@ -77,16 +78,14 @@ public class ShoppingListService {
 	}
 		
 	// View a sorted shopping list by category
-			public List<Item> sortShoppingListByCategory() {
-				return shopList.stream()
-						.sorted(Comparator.comparing(Item::category))
-						.collect(Collectors.toList());
-			}
+	public List<Item> sortShoppingListByCategory() {
+			return shopList.stream()
+					.sorted(Comparator.comparing(Item::category))
+					.collect(Collectors.toList());
+	}
 				
 	// View a sorted shopping list by category, in defined order
-			public List<Item> sortShoppingListByCategory(String order) {
-				// check that order input is valid
-				
+	public List<Item> sortShoppingListByCategory(String order) {
 				switch (order.toUpperCase()) {
 					case "DESC" -> {return shopList.stream()
 							.sorted(Comparator.comparing(Item::category))
@@ -95,5 +94,5 @@ public class ShoppingListService {
 							.sorted(Comparator.comparing(Item::category))
 							.collect(Collectors.toList());}
 					}
-				}		
+	}		
 }

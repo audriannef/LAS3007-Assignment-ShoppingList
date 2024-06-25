@@ -36,6 +36,7 @@ public class ShoppingListUpdateItemIT {
 	
 	@Test
     public void testUpdateItemDetailsById() {
+		// test updating an existing item
     	loadShoppingListSample();
     	File jsonFile = new File("src/test/resources/update-shoppingListItem-request.json");
     	
@@ -46,7 +47,7 @@ public class ShoppingListUpdateItemIT {
         .when()
             .put("/shopList/id/{id}", 9L)
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("id", equalTo(9))
         	.body("category", equalTo("clothes"))
         	.body("description", equalTo("trousers"))
@@ -55,6 +56,7 @@ public class ShoppingListUpdateItemIT {
     
     @Test
     public void testUpdateItemDetailsForNonExistantID() {
+    	// test updating an item which does not exist in shopping list
     	File jsonFile = new File("src/test/resources/update-shoppingListItem-request.json");
     	
         given()
@@ -64,12 +66,12 @@ public class ShoppingListUpdateItemIT {
         .when()
             .put("/shopList/id/{id}", 9999999)
         .then()
-            .statusCode(404);
+            .statusCode(404); // Not found
     }
     
     @Test
     public void testUpdateItemDetailsWithInvalidBody() {
-    	
+    	// update details but invalid json body included in put request
         given()
         	.body("{123456789}")
         	.contentType("application/json")
@@ -100,7 +102,7 @@ public class ShoppingListUpdateItemIT {
         .when()
             .put("/shopList/id/{id}", 9)
         .then()
-            .statusCode(404);;
+            .statusCode(404);// not found
     }
     
 

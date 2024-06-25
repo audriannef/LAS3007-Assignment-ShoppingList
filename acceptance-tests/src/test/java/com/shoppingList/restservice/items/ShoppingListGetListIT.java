@@ -28,8 +28,6 @@ public class ShoppingListGetListIT {
 
 	private static String KEY;
 	
-	private static Random RANDOM = new Random();
-	
 	@BeforeAll
 	static void setup() throws IOException {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.BODY);
@@ -54,7 +52,7 @@ public class ShoppingListGetListIT {
         .when()
             .get("/shopList")
         .then()
-            .statusCode(200)
+            .statusCode(200) // OK
             .body("size()", greaterThanOrEqualTo(0));
     }
 	
@@ -66,7 +64,7 @@ public class ShoppingListGetListIT {
             .get("/shopList")
         .then()
         	.body("detail",is("Invalid request parameters."))
-            .statusCode(400);
+            .statusCode(400); // Bad request
     }
 	
 }

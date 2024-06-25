@@ -73,7 +73,7 @@ public class ShoppingListDeleteItemIT {
            .delete("/shopList/id/{id}", item.id())
        .then()
        		.body("detail",is("Invalid request parameters."))
-       		.statusCode(400);
+       		.statusCode(400); // Bad request
    }
 	
     @Test
@@ -88,6 +88,7 @@ public class ShoppingListDeleteItemIT {
     }
        
    private static Stream<Item> itemCreator() {
+	   // create item and add to shopping list
         Item item = new Item(RANDOM.nextLong(), randomAlphabetic(10), randomAlphabetic(10), RANDOM.nextInt(100));
 
         Item newItem = given()
