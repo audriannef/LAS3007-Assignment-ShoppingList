@@ -6,3 +6,4 @@ A shopping list web-restservice with the following functionalities:
 - filter list on particular category
 - sort list based on category
 - view shopping list
+
